@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  availability: MyString
+  bio: MyText
+  hourly_rate: 1
+  goal: MyString
+  exeperience_level: MyString
+  user: one
+
+two:
+  availability: MyString
+  bio: MyText
+  hourly_rate: 1
+  goal: MyString
+  exeperience_level: MyString
+  user: two

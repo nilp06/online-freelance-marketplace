@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  language_name: MyString
+  proficiency_level: MyString
+  freelancer_user_profile: one
+
+two:
+  language_name: MyString
+  proficiency_level: MyString
+  freelancer_user_profile: two

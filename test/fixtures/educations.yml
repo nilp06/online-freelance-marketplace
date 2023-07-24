@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  college: MyString
+  degree: MyString
+  field_of_study: MyString
+  start_date: 2023-07-24
+  end_date: 2023-07-24
+  description: MyString
+  freelance_user_profile: one
+
+two:
+  college: MyString
+  degree: MyString
+  field_of_study: MyString
+  start_date: 2023-07-24
+  end_date: 2023-07-24
+  description: MyString
+  freelance_user_profile: two

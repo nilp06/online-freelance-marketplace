@@ -10,9 +10,102 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_091810) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_095415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "certifications", force: :cascade do |t|
+    t.string "name"
+    t.string "authority"
+    t.date "issue_date"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_certifications_on_freelancer_user_profile_id"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string "college"
+    t.string "degree"
+    t.string "field_of_study"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "description"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_educations_on_freelancer_user_profile_id"
+  end
+
+  create_table "freelancer_exeperiences", force: :cascade do |t|
+    t.string "company"
+    t.string "position"
+    t.string "type"
+    t.string "location"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "present"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_freelancer_exeperiences_on_freelancer_user_profile_id"
+  end
+
+  create_table "freelancer_user_profiles", force: :cascade do |t|
+    t.string "availability"
+    t.text "bio"
+    t.integer "hourly_rate"
+    t.string "goal"
+    t.string "exeperience_level"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_freelancer_user_profiles_on_user_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "language_name"
+    t.string "proficiency_level"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_languages_on_freelancer_user_profile_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.text "description"
+    t.string "title"
+    t.string "technology"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_projects_on_freelancer_user_profile_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.bigint "category_id", null: false
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_services_on_category_id"
+    t.index ["freelancer_user_profile_id"], name: "index_services_on_freelancer_user_profile_id"
+  end
+
+  create_table "social_account_links", force: :cascade do |t|
+    t.string "account_name"
+    t.string "link"
+    t.bigint "freelancer_user_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_user_profile_id"], name: "index_social_account_links_on_freelancer_user_profile_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +122,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_091810) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "certifications", "freelancer_user_profiles"
+  add_foreign_key "educations", "freelancer_user_profiles"
+  add_foreign_key "freelancer_exeperiences", "freelancer_user_profiles"
+  add_foreign_key "freelancer_user_profiles", "users"
+  add_foreign_key "languages", "freelancer_user_profiles"
+  add_foreign_key "projects", "freelancer_user_profiles"
+  add_foreign_key "services", "categories"
+  add_foreign_key "services", "freelancer_user_profiles"
+  add_foreign_key "social_account_links", "freelancer_user_profiles"
 end

@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_24_095415) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_062124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "line1"
+    t.string "line2"
+    t.string "city"
+    t.string "country"
+    t.string "state"
+    t.string "zipcode"
+    t.string "addressable_type", null: false
+    t.bigint "addressable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
+  end
+
+  create_table "bank_details", force: :cascade do |t|
+    t.string "bank_name"
+    t.integer "account_number"
+    t.integer "ifsc_code"
+    t.string "accountable_type", null: false
+    t.bigint "accountable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["accountable_type", "accountable_id"], name: "index_bank_details_on_accountable"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -96,6 +121,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_095415) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_services_on_category_id"
     t.index ["freelancer_user_profile_id"], name: "index_services_on_freelancer_user_profile_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.string "skillable_type", null: false
+    t.bigint "skillable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skillable_type", "skillable_id"], name: "index_skills_on_skillable"
   end
 
   create_table "social_account_links", force: :cascade do |t|

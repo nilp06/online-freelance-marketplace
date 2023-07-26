@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  title: MyString
+  technology: MyString
+  freelancer_user_profile: one
+
+two:
+  description: MyText
+  title: MyString
+  technology: MyString
+  freelancer_user_profile: two
